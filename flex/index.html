@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #app {
+      max-width: 400px;
+      margin: auto;
+    }
+    .title {
+      font-size: 14px;
+      color: #666;
+    }
+    .container {
+      display: flex;
+    }
+    .container-inline {
+      display: inline-flex;
+    }
+    [class *="demo"] {
+      margin: 10px 0;
+      /* padding: 20px; */
+      border-radius: 4px;
+      border:1px solid #cdcdcd;
+    }
+    [class *="item-"] {
+      width: 50px;
+      height: 50px;
+    }
+    .item-1 {
+      background-color: #ffe2bc;
+    }
+    .item-2 {
+      background-color: #ffb367;
+    }
+    .item-3 {
+      background-color: #ffe277;
+    }
+    .item-4 {
+      background-color: #58b4ae;
+    }
+    .item-5 {
+      background-color: #aeefec;
+    }
+    .item-6 {
+      background-color: #f78259;
+    }
+    .item-7 {
+      background-color: #eb4559;
+    }
+    .item-8 {
+      background-color: #f6acc8;
+    }
+    .item-9 {
+      background-color: #af8baf;
+    }
+
+    /* flex-direction */
+    .demo3 .container {
+      flex-direction: row;
+    }
+    .demo4 .container {
+      flex-direction: row-reverse;
+    }
+    .demo5 .container {
+      flex-direction: column;
+    }
+    .demo6 .container {
+      flex-direction: column-reverse;
+    }
+    .demo7 .container {
+      flex-wrap: nowrap;
+    }
+    .demo8 .container {
+      flex-wrap: wrap;
+    }
+    .demo9 .container {
+      flex-wrap: wrap-reverse;
+    }
+    .demo10 .container {
+      flex-direction: row-reverse;
+      flex-wrap: wrap-reverse;
+    }
+    .demo11 .container {
+      justify-content: flex-start;
+    }
+    .demo12 .container {
+      justify-content: flex-end;
+    }
+    .demo13 .container {
+      justify-content: center;
+    }
+    .demo14 .container {
+      justify-content: space-between;
+    }
+    .demo15 .container {
+      justify-content: space-around;
+    }
+    .demo16 .container {
+      height: 100px;
+      align-items: flex-start;
+    }
+    .demo17 .container {
+      height: 100px;
+      align-items: center;
+    }
+    .demo18 .container {
+      height: 100px;
+      align-items: flex-end;
+    }
+    .demo19 .container {
+      height: 100px;
+      align-items: stretch;
+    }
+    .demo19 .container  [class*="item-"]  {
+      height: auto;
+    }
+    .demo20 .container {
+      height: 100px;
+      align-items: baseline;
+    }
+    .demo20 .container .item-3 {
+      height: 100px;
+      line-height: 100px;
+    }
+
+    .demo21 .container {
+      height: 150px;
+      flex-wrap: wrap;
+      align-content: flex-start;
+    }
+    .demo22 .container {
+      height: 150px;
+      flex-wrap: wrap;
+      align-content: center;
+    }
+    .demo23 .container {
+      height: 150px;
+      flex-wrap: wrap;
+      align-content: flex-end;
+    }
+    .demo24 .container {
+      height: 150px;
+      flex-wrap: wrap;
+      align-content: stretch;
+    }
+    .demo24 .container  [class*="item-"]  {
+      height: auto;
+    }
+    .demo25 .container {
+      height: 150px;
+      flex-wrap: wrap;
+      align-content: space-between;
+    }
+    .demo26 .container {
+      height: 150px;
+      flex-wrap: wrap;
+      align-content: space-around;
+    }
+
+    .demo27 .container .item-1 {
+      order: 1
+    }
+    .demo27 .container .item-4 {
+      order: -1
+    }
+    .demo28 .container {
+      flex-wrap: wrap;
+    }
+    .demo28 .container .item-1 {
+      flex-grow: 1;
+    }
+    .demo29 .container {
+      flex-wrap: wrap;
+    }
+    .demo29 .container [class*="item-"] {
+      flex-grow: 1;
+    }
+    .demo29 .container .item-2 {
+      flex-grow: 2;
+    }
+    .demo29 .container .item-4 {
+      flex-grow: 3;
+    }
+    .demo30 .container .item-4 {
+      flex-shrink: 0;
+    }
+    .demo31 .container .item-4 {
+      flex-shrink: 0;
+    }
+    .demo31 .container .item-6 {
+      flex-shrink: 2;
+    }
+    .demo31 .container .item-7 {
+      flex-shrink: 3;
+    }
+
+    .demo32 .container .item-4 {
+      flex-basis: 100px;
+    }
+    .demo33 .container {
+      flex-direction: column;
+    }
+    .demo33 .container .item-2 {
+      flex-basis: 100px;
+    }
+    .demo34 .container {
+      align-items: center;
+    }
+    .demo34 .container .item-1 {
+      align-self: flex-start;
+    }
+    .demo34 .container .item-2 {
+      align-self: center;
+    }
+    .demo34 .container .item-3 {
+      align-self: flex-end;
+    }
+    .demo34 .container .item-4 {
+      align-self: baseline;
+    }
+    .demo34 .container .item-5 {
+      height: 100px;
+      line-height: 100px;
+    }
+    .demo34 .container .item-6 {
+      align-self: stretch;
+    }
+    .demo34 .container .item-7 {
+      align-self: auto;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- display -->
+    <p class="title">display</p>
+    <div class="demo1">
+      <span>文字</span>
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+      <span>文字</span>
+    </div>
+    <div class="demo2">
+      <span>文字</span>
+      <div class="container-inline">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+      </div>
+      <span>文字</span>
+    </div>
+
+    <!-- flex-direction 定义主轴方向 -->
+    <p class="title">flex-direction</p>
+    <div class="demo3">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+    </div>
+    <div class="demo4">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+    </div>
+    <div class="demo5">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+      </div>
+    </div>
+    <div class="demo6">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+      </div>
+    </div>
+
+    <!-- flex-wrap 定义空间不足时换行 -->
+    <p class="title">flex-wrap</p>
+    <div class="demo7">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+    </div>
+    <div class="demo8">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+    </div>
+    <div class="demo9">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+    </div>
+
+    <!-- flex-flow 是flex-direction flex-wrap的缩写 -->
+    <p class="title">flex-flow</p>
+    <div class="demo10">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+    </div>
+
+    <!-- justify-content 设置容器在主轴的对齐方式 -->
+    <p class="title">justify-content</p>
+    <div class="demo11">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+      </div>
+    </div>
+    <div class="demo12">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+      </div>
+    </div>
+    <div class="demo13">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+      </div>
+    </div>
+    <div class="demo14">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+      </div>
+    </div>
+    <div class="demo15">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+      </div>
+    </div>
+
+    <!-- align-items 定义项目在交叉轴如何对齐 -->
+    <p class="title">align-items</p>
+    <div class="demo16">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+    </div>
+    <div class="demo17">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+    </div>
+    <div class="demo18">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+    </div>
+    <div class="demo19">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+    </div>
+    <div class="demo20">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+    </div>
+    <!-- align-content 多根轴线的对齐方式,如果只有一个轴线，该属性不起作用。 -->
+    <p class="title">align-content</p>
+    <div class="demo21">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+    </div>
+    <div class="demo22">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+    </div>
+    <div class="demo23">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+    </div>
+    <div class="demo24">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+    </div>
+    <div class="demo25">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+    </div>
+    <div class="demo26">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+    </div>
+
+    <!-- 项目属性 -->
+    <!-- order 属性定义项目的排列顺序，数值越小， 排列越靠前，默认为0 -->
+    <p class="title">order</p>
+    <div class="demo27">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+    </div>
+
+    <!-- flex-grow定义项目的放大比例，默认为0,既存在剩余空间也不放大 -->
+    <p class="title">flex-grow</p>
+    <div class="demo28">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+    </div>
+    <div class="demo29">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+    </div>
+
+    <!-- flex-shirnk,定义项目的缩小比例， 默认为1,即空间不足，项目将缩小。 -->
+    <p class="title">flex-shirnk</p>
+    <div class="demo30">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+    </div>
+    <div class="demo31">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+    </div>
+
+    <!-- flex-basis,定义了在分配多余空间之前，项目占据的主轴空间大小，默认值为auto，即项目的本来大小。 -->
+    <p class="title">flex-basis</p>
+    <div class="demo32">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+    </div>
+    <div class="demo33">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+      </div>
+    </div>
+
+    <!-- align-self，属性定义项目的对齐方式，只对单个项目有效。可覆盖align-items属性，默认值为auto表示继承父元素的align-items， -->
+    <p class="title">align-self</p>
+    <div class="demo34">
+      <div class="container">
+        <div class="item-1">1</div>
+        <div class="item-2">2</div>
+        <div class="item-3">3</div>
+        <div class="item-4">4</div>
+        <div class="item-5">5</div>
+        <div class="item-6">6</div>
+        <div class="item-7">7</div>
+        <div class="item-8">8</div>
+        <div class="item-9">9</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
